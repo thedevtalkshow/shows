@@ -1,0 +1,47 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@if (HttpContext.User.Identity.IsAuthenticated)
+{
+    <p>Hello, @HttpContext.User.Identity.Name !</p>
+}
+else
+{
+    <p>You are not authenticated.</p>
+}
+
+
+@code {
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, "admin"),
+            new Claim(ClaimTypes.Email, "admin@mywebsite.com"),
+            new Claim("Department", "HR"),
+            new Claim("Admin", "true"),
+            new Claim("Manager", "true"),
+            new Claim("EmploymentDate", "2023-05-01"),
+        };
+
+        var identity = new ClaimsIdentity(claims, "MyCookieAuth");
+        var claimsPrincipal = new ClaimsPrincipal(identity);
+
+        var authProperties = new AuthenticationProperties
+        {
+            IsPersistent = true,
+        };
+
+        await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal, authProperties);
+    }
+}
