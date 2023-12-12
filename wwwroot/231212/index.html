@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown>
+				## Blazor in .NET 8: The future of ASP.NET Core
+				### Chris Gomez
+				#### [@SpaceShot](https://twitter.com/SpaceShot)
+			</section>
+			<section data-markdown>
+				## The Dev Talk Show
+
+				The Dev Talk Show is now live before your daily standup!
+				- Starts around 7:45a, Ends at 9:00a, No set schedule yet (sorry)
+				- https://twitch.tv/thedevtalkshow
+				- https://youtube.com/thedevtalkshow
+				- https://www.linkedin.com/company/thedevtalkshow
+				- [Follow @TheDevTalkShow on Twitter](https://twitter.com/thedevtalkshow)
+
+				[www.thedevtalkshow.com](https://www.thedevtalkshow.com)
+
+				All replays: [youtube.com/thedevtalkshow](https://www.youtube.com/thedevtalkshow)
+			</section>
+			<section data-markdown>
+				## Installation Tips
+				### Everything today is for .NET 8 GA
+
+				General Release was at [.NET Conf 2023](https://www.dotnetconf.net/)
+
+				Visual Studio IDE users need to use Visual Studio 2022 (at least v17.8.0).
+
+				Visual Studio Code works as well. .NET Downloads at [dot.net](https:/dot.net).
+				
+				or try WinGet:
+
+				`winget install --id 'Microsoft.DotNet.SDK'`
+			</section>
+			<section data-markdown>
+				### ASP.NET Core web UI
+				#### Three Major Choices
+
+				- ASP.NET Core MVC
+					- Controller Based, MVC Pattern
+					- Server-Side Rendering
+				- ASP.NET Core Razor Pages
+					- Page Based
+					- Server-Side Rendering
+				- ASP.NET Core Blazor
+					- **Component Based**
+					- Client Updates - WebAssembly or SignalR based model
+
+				From the Docs: [Choose an ASP.NET Core web UI](https://learn.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-8.0) 
+			</section>
+			<section>
+				<h3>Blazor - a short history</h3>
+				<ul>
+					<li>First appeared in ASP.NET Core 3.0 (2019)</li>
+					<li>Applications selected a <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/hosting-models?view=aspnetcore-8.0">hosting model</a></li>
+				</ul>
+				<div>
+					<img src="img/blazor-webassembly.png" style="padding: 10px; max-height: 250px; max-width: 100%;" alt="Blazor WebAssembly Hosting Model">
+					<img src="img/blazor-server.png" style="padding: 10px; max-height: 250px; max-width: 100%;" alt="Blazor Server Hosting Model">
+				<div>
+				You can build applications that support both, but you have to choose one when you deploy to production.
+			</section>
+			<section data-markdown>
+				### Blazor in ASP.NET Core 8.0
+
+				#### Render Modes Are Now The Foundation
+
+				- Static
+				- Interactive Server
+				- Interactive WebAssembly
+				- Interactive Auto
+
+				From the Docs: [ASP.NET Core Blazor render modes](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes?view=aspnetcore-8.0#render-modes)
+
+				Coder Foundry's Demo and Sample:
+
+				Demo: https://www.youtube.com/watch?v=u4azTLLGt8U&t=654s
+
+				Sample: https://github.com/CoderFoundry/BlazorRenderModes
+			</section>
+			<section data-markdown>
+				### Enhanced Navigation
+
+				Normal navigation: A full-page reload is triggered when the user navigates to a different page.
+
+				Enhanced navigation: Blazor automatically intercepts the request and performs a fecth request to the server.  Blazor patches the response into the DOM.
+
+				This works in Server Side Rendering (Static Render Mode) and is where it really stands out!
+
+				From the Docs: [Enhanced navigation and form handling](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?preserve-view=true&view=aspnetcore-8.0#enhanced-navigation-and-form-handling)
+			</section>
+			<section data-markdown>
+				### Enhanced Form Handling
+				For forms this is opt-in behavior
+
+				Enhanced navigation: Blazor automatically intercepts the request and calls server-side code.
+				Blazor patches the updates into the DOM.
+
+				Opt in with: 
+				- `data-enhance` attribute in `&ltform>`
+				- `Enhance` attribute in `&ltEditForm>`
+				
+				From the Docs: [Enhanced navigation and form handling](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing?preserve-view=true&view=aspnetcore-8.0#enhanced-navigation-and-form-handling)
+			</section>
+			<section data-markdown>
+				### Render Razor Components Outside of ASP.NET Core
+
+				- Blazor components can be rendered outside of ASP.NET Core
+					- Console apps or services that can benefit from HTML fragments
+					- Not the same thing as [Blazor Hybrid](https://docs.microsoft.com/en-us/aspnet/core/blazor/hybrid?view=aspnetcore-8.0)
+						- Blazor Hybrid provides support for .NET MAUI, WPF, WinForms, etc.
+					
+				From the Docs: [Render Razor components outside of ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-components-outside-of-aspnetcore?view=aspnetcore-8.0)
+			</section>
+			<section data-markdown>
+				### Identity UI Components
+
+				- Blazor generates a Blazor-based Identity UI
+					- Previously based on Razor Pages
+					- Currently select Individual Accounts
+					- Currently only works with Server-Side Blazor
+						- Your project is pre-filled with components and code to enable Identity
+						- More guidance and samples to come
+					
+				From the Blog Post: [Blazor Identity UI](https://devblogs.microsoft.com/dotnet/asp-net-core-updates-in-dotnet-8-rc-2/#identity)
+				
+				From the Docs: [Blazor Identity UI](https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-8.0?view=aspnetcore-8.0#blazor-identity-ui)
+
+				TheDevTalkShow: [First look at Blazor Authentication and Authorization in .NET 8](https://www.youtube.com/watch?v=JMVjLXE-7YY)
+			</section>		
+			<section data-markdown>
+				### References
+				[Full stack web UI with Blazor in .NET 8 | .NET Conf 2023](https://www.youtube.com/watch?v=YwZdtLEtROA&list=PLdo4fOcmZ0oULyHSPBx-tQzePOYlhvrAU&index=3)
+				
+				[Intro to Blazor in .NET 8 | Tim Corey](https://www.youtube.com/watch?v=walv3nLTJ5g)
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
