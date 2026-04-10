@@ -3,8 +3,8 @@ using Microsoft.Agents.AI;
 using Azure.Identity;
 using System.ComponentModel;
 
-var endpoint = "https://structuredoutput-foundry.services.ai.azure.com/api/projects/structuredoutput";
-var deployment = "gpt-4.1-mini";
+var endpoint = "https://<your-project-name>.services.ai.azure.com/api/projects/structuredoutput";
+var deployment = "<your-deployment-name>";
 
 AIAgent agent = new AIProjectClient(new Uri(endpoint), new DefaultAzureCredential())
     .AsAIAgent(
