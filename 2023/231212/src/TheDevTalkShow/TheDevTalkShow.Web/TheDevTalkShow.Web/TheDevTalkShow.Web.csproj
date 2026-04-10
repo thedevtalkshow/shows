@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TheDevTalkShow.Web.Client\TheDevTalkShow.Web.Client.csproj" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.2.23480.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

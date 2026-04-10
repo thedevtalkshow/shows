@@ -1,5 +1,6 @@
 ﻿@using TheDevTalkShow.Web.Client.Services
 @inject ILatestYouTubeVideoService latestVideoService
+@rendermode @(new InteractiveAutoRenderMode(prerender: false))
 
 <YouTubeVideo VideoId="@YtResponse" Width="@Width" Height="@Height" />
 

@@ -17,6 +17,15 @@ else
     <p>You are not authenticated.</p>
 }
 
+<AuthorizeView>
+    <Authorized>
+        <p>You are authorized.</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>You are not authorized.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
 
 @code {
     [CascadingParameter]
@@ -38,9 +47,9 @@ else
         var claimsPrincipal = new ClaimsPrincipal(identity);
 
         var authProperties = new AuthenticationProperties
-        {
-            IsPersistent = true,
-        };
+            {
+                IsPersistent = true,
+            };
 
         await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal, authProperties);
     }
